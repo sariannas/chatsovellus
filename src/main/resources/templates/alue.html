@@ -23,14 +23,14 @@
                 <tr>
                     <th>Otsikko</th>
                     <th>Kirjoittaja</th>
-                    <th>Uusin viesti (ei toimi)</th>
+                    <th>Uusin viesti</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="avaus: ${alue.avaukset}">
                     <td><a th:href="${'/ketju/' + avaus.id}"><span th:text="${avaus.otsikko}">avauksen otsikko</span></a></td>
                     <td th:text="${avaus.kirjoittaja}">avauksen kirjoittaja</td>
-                    <td th:text="${avaus.pvm}">avauksen pvm</td>
+                    <td th:text="${avaus.viimeisin}">pvm</td>
                 </tr>
             </tbody>
         </table>

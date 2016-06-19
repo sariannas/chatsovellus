@@ -20,13 +20,13 @@
             <thead>
                 <tr>
                     <th>Aihe</th>
-                    <th>Uusin viesti (ei toimi)</th>
+                    <th>Uusin viesti</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="alue: ${alueet}">
                     <td><a th:href="${'/alue/' + alue.id}"><span th:text="${alue.otsikko}">alueen otsikko</span></a></td>
-                    <td>p‰iv‰m‰‰r‰</td>
+                    <td th:text="${alue.viimeisin}">pvm</td>
                 </tr>
             </tbody>
         </table>

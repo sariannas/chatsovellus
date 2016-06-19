@@ -65,7 +65,7 @@ public class Avaus {
         viesti.setAvaus(this);
     }
     
-    public Date viimeisin() {
+    public Date getViimeisin() {
         //Jos viestejä ei ole, palautetaan avauksen pvm.
         //Jos viestejä on, palautetaan viimeisenä lisätyn päivämäärä.
         if(this.viestit.isEmpty()) {

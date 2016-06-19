@@ -36,13 +36,13 @@ public class Alue {
         a.setAlue(this);
     }
     
-   public Date viimeisin() {
+   public Date getViimeisin() {
        if(this.avaukset.isEmpty()) {
            return this.pvm;
        }
        
        Avaus a = this.avaukset.get(this.avaukset.size()-1);
-       return a.viimeisin();
+       return a.getViimeisin();
    }
     
     
