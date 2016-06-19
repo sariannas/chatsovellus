@@ -3,16 +3,48 @@
 
     <head>
         <title>Otsikko</title>
-        <meta charset="utf-8" />
+        <meta charset="ISO-8859-1" />
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+            }
+        </style>
     </head>
 
     <body>
         <h1><span th:text="${alue.otsikko}">otsikko</span></h1>
 
-        <ol>
-            <li th:each="avaus: ${alue.avaukset}">
-                <span th:text="${avaus.otsikko}">avauksen otsikko</span> <a th:href="${'/avaukset/' + avaus.id}">linkki</a>
-            </li>
-        </ol>
+        <table>
+            <thead>
+                <tr>
+                    <th>Otsikko</th>
+                    <th>Kirjoittaja</th>
+                    <th>Uusin viesti (ei toimi)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="avaus: ${alue.avaukset}">
+                    <td><a th:href="${'/ketju/' + avaus.id}"><span th:text="${avaus.otsikko}">avauksen otsikko</span></a></td>
+                    <td th:text="${avaus.kirjoittaja}">avauksen kirjoittaja</td>
+                    <td th:text="${avaus.pvm}">avauksen pvm</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p></p>
+        <p><b>Lis‰‰ viesti</b></p>
+        <form method="POST" action="/">
+            Kirjoittaja:<br/>
+            <input type="text" name="kirjoittaja"/><br/>
+            Otsikko:<br/>
+            <input type="text" name="otsikko"/><br/>
+            Viesti:<br/>
+            <textarea rows="4" cols="50" name="sisalto"></textarea> <br/>
+            <input type="submit" value="L‰het‰"/>
+        </form>
     </body>
 </html>

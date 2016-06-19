@@ -16,52 +16,58 @@ public class Main {
         database.init();
 
         OpiskelijaDao opiskelijaDao = new OpiskelijaDao(database);
-        
+
         //Testialueita ja viestejä, ilman tietokantaa
         Alue ekaAlue = new Alue(1, "Eka alue");
         Alue tokaAlue = new Alue(2, "Toka alue");
         List<Alue> alueet = new ArrayList();
         alueet.add(ekaAlue);
         alueet.add(tokaAlue);
-        
+
         Avaus ekanEka = new Avaus(1, "Joku", "Otsikko", "Sisältö");
         Avaus ekanToka = new Avaus(2, "Joku muu", "Eri otsikko", "Fiksu sisältö");
         Avaus tokanEka = new Avaus(3, "???", "Otsikko", "Blaaaaaa");
         ekaAlue.lisaaAvaus(ekanEka);
         ekaAlue.lisaaAvaus(ekanToka);
         tokaAlue.lisaaAvaus(tokanEka);
-        
-        Viesti eka = new Viesti("Vastaaja","Vastaus");
+
+        Viesti eka = new Viesti("Vastaaja", "Vastaus");
         ekanEka.lisaaViesti(eka);
-        Viesti toka = new Viesti("Kommentoija","Solvaava kommentti");
+        Viesti toka = new Viesti("Kommentoija", "Solvaava kommentti");
         tokanEka.lisaaViesti(toka);
 
+        // etusivu
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
+            //aluee= alueDao.findAll();
             map.put("alueet", alueet);
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
 
-        get("/opiskelijat", (req, res) -> {
-            HashMap map = new HashMap<>();
-            map.put("opiskelijat", opiskelijaDao.findAll());
-
-            return new ModelAndView(map, "opiskelijat");
-        }, new ThymeleafTemplateEngine());
-        
-        get("/alue", (req, res) -> {
+        // alue
+        get("/alue/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("alue", ekaAlue);
 
             return new ModelAndView(map, "alue");
         }, new ThymeleafTemplateEngine());
-        
-        get("/ketju", (req, res) -> {
+
+        // avaus + viestiketju
+        get("/ketju/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("avaus", ekanEka);
 
             return new ModelAndView(map, "avaus");
+        }, new ThymeleafTemplateEngine());
+
+        
+        // pohjassa valmiina olleet sivut
+        get("/opiskelijat", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("opiskelijat", opiskelijaDao.findAll());
+
+            return new ModelAndView(map, "opiskelijat");
         }, new ThymeleafTemplateEngine());
 
         get("/opiskelijat/:id", (req, res) -> {

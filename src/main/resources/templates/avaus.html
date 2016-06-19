@@ -3,20 +3,50 @@
 
     <head>
         <title>Otsikko</title>
-        <meta charset="utf-8" />
+        <meta charset="ISO-8859-1" />
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+            }
+        </style>
     </head>
 
     <body>
         <h1><span th:text="${avaus.otsikko}">otsikko</span></h1>
         <p><i><span th:text="${avaus.kirjoittaja}">nimimerkki</span></i></p>
+        <p><span th:text="${avaus.pvm}">pvm</span></p>
         <p></p>
         <p><span th:text="${avaus.sisalto}">keskustelunavaus</span></p>
-        
-        <ul>
-            <li th:each="viesti: ${avaus.viestit}">
-                <span th:text="${viesti.kirjoittaja}">vastaajan nimi</span> <br/>
-                <span th:text="${viesti.sisalto}">viestin sis√§lt√∂</span>
-            </li>
-        </ul>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Kirjoittaja</th>
+                    <th>Viesti</th>
+                    <th>pvm</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="viesti: ${avaus.viestit}">
+                    <td th:text="${viesti.kirjoittaja}">viestin kirjoittaja</td>
+                    <td th:text="${viesti.sisalto}">viestin sis‰ltˆ</td>
+                    <td th:text="${viesti.pvm}">viestin pvm</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p></p>
+        <p><b>Lis‰‰ viesti</b></p>
+        <form method="POST" action="/">
+            Kirjoittaja:<br/>
+            <input type="text" name="kirjoittaja"/><br/>
+            Viesti:<br/>
+            <textarea rows="4" cols="50" name="sisalto"></textarea> <br/>
+            <input type="submit" value="L‰het‰"/>
+        </form>
     </body>
 </html>
