@@ -10,8 +10,8 @@ public class Avaus {
     private List<Viesti> viestit;
     private Alue alue;
 
-    public Avaus(int id, String kirjoittaja, String otsikko, String sisalto) {
-        this.id = 1;        
+    public Avaus(int id, String otsikko, String kirjoittaja, String sisalto) {
+        this.id = id;        
         this.kirjoittaja = kirjoittaja;
         this.otsikko = otsikko;
         this.sisalto = sisalto;
@@ -74,6 +74,10 @@ public class Avaus {
         
         Viesti vika = this.viestit.get(this.viestit.size()-1);
         return vika.getPvm();
+    }
+    
+    public int getKoko() {
+        return this.viestit.size() + 1;
     }
     
     

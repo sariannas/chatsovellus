@@ -20,15 +20,24 @@
             <thead>
                 <tr>
                     <th>Aihe</th>
+                    <th>Viestien m‰‰r‰</th>
                     <th>Uusin viesti</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="alue: ${alueet}">
                     <td><a th:href="${'/alue/' + alue.id}"><span th:text="${alue.otsikko}">alueen otsikko</span></a></td>
+                    <td th:text="${alue.koko}">viestien m‰‰r‰</td>
                     <td th:text="${alue.viimeisin}">pvm</td>
                 </tr>
             </tbody>
         </table>
+        
+        <p><b>Lis‰‰ alue</b></p>
+        <form method="POST" action="/">
+            Otsikko:<br/>
+            <input type="text" name="otsikko"/><br/>
+            <input type="submit" value="L‰het‰"/>
+        </form>
     </body>
 </html>

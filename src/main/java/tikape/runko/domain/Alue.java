@@ -31,11 +31,6 @@ public class Alue {
         return pvm;
     }
     
-    public void lisaaAvaus(Avaus a) {
-        this.avaukset.add(a);
-        a.setAlue(this);
-    }
-    
    public Date getViimeisin() {
        if(this.avaukset.isEmpty()) {
            return this.pvm;
@@ -44,6 +39,22 @@ public class Alue {
        Avaus a = this.avaukset.get(this.avaukset.size()-1);
        return a.getViimeisin();
    }
-    
+      
+   public int getKoko() {
+      int i = 0;
+      for(Avaus a : this.avaukset) {
+          i+=a.getKoko();
+      }
+      
+      return i;
+   }
+   
+   public void haeAvaukset(List<Avaus> avaukset) {
+       for (Avaus a : avaukset) {
+            if (a.getAlue().getId() == this.id) {
+                this.avaukset.add(a);
+            }
+        }
+   }
     
 }

@@ -23,6 +23,7 @@
                 <tr>
                     <th>Otsikko</th>
                     <th>Kirjoittaja</th>
+                    <th>Viestien mï¿½ï¿½rï¿½</th>
                     <th>Uusin viesti</th>
                 </tr>
             </thead>
@@ -30,13 +31,14 @@
                 <tr th:each="avaus: ${alue.avaukset}">
                     <td><a th:href="${'/ketju/' + avaus.id}"><span th:text="${avaus.otsikko}">avauksen otsikko</span></a></td>
                     <td th:text="${avaus.kirjoittaja}">avauksen kirjoittaja</td>
+                    <td th:text="${avaus.koko}">viestien mï¿½ï¿½rï¿½</td>
                     <td th:text="${avaus.viimeisin}">pvm</td>
                 </tr>
             </tbody>
         </table>
 
         <p></p>
-        <p><b>Lisää viesti</b></p>
+        <p><b>LisÃ¤Ã¤ viesti</b></p>
         <form method="POST" action="/">
             Kirjoittaja:<br/>
             <input type="text" name="kirjoittaja"/><br/>
@@ -44,7 +46,7 @@
             <input type="text" name="otsikko"/><br/>
             Viesti:<br/>
             <textarea rows="4" cols="50" name="sisalto"></textarea> <br/>
-            <input type="submit" value="Lähetä"/>
+            <input type="submit" value="LÃ¤hetÃ¤"/>
         </form>
     </body>
 </html>
