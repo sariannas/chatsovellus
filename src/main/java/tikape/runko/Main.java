@@ -51,8 +51,7 @@ public class Main {
         get("/alue/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             Alue a = alueDao.findOne(Integer.parseInt(req.params("id")));
-            List<Avaus> kaikkiAvaukset = avausDao.findAll();
-            a.haeAvaukset(kaikkiAvaukset);
+            a.setAvaukset(avausDao.findAlueella(a));
             map.put("alue", a);
 
             return new ModelAndView(map, "alue");

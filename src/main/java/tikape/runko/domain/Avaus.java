@@ -6,17 +6,17 @@ public class Avaus {
     private String kirjoittaja;
     private String otsikko;
     private String sisalto;
-    private Date pvm;
+    private String pvm;
     private List<Viesti> viestit;
     private Alue alue;
 
-    public Avaus(int id, String otsikko, String kirjoittaja, String sisalto) {
+    public Avaus(int id, String otsikko, String kirjoittaja, String sisalto, String pvm) {
         this.id = id;        
         this.kirjoittaja = kirjoittaja;
         this.otsikko = otsikko;
         this.sisalto = sisalto;
         
-        this.pvm = new Date();
+        this.pvm = pvm;
         this.viestit = new ArrayList();
     }
 
@@ -36,7 +36,7 @@ public class Avaus {
         return sisalto;
     }
 
-    public Date getPvm() {
+    public String getPvm() {
         return pvm;
     }
 
@@ -65,7 +65,7 @@ public class Avaus {
         viesti.setAvaus(this);
     }
     
-    public Date getViimeisin() {
+    public String getViimeisin() {
         //Jos viestejä ei ole, palautetaan avauksen pvm.
         //Jos viestejä on, palautetaan viimeisenä lisätyn päivämäärä.
         if(this.viestit.isEmpty()) {

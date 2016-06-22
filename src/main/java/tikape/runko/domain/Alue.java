@@ -5,13 +5,14 @@ import java.util.*;
 public class Alue {
     private int id;
     private String otsikko;
-    private Date pvm;
+    private String pvm;
     private List<Avaus> avaukset;
 
     public Alue(int id, String otsikko) {
         this.id = id;
         this.otsikko = otsikko;
-        this.pvm = new Date();
+        Date nyt = new Date();
+        this.pvm = nyt.toString();
         this.avaukset = new ArrayList();
     }
 
@@ -27,11 +28,11 @@ public class Alue {
         return otsikko;
     }
 
-    public Date getPvm() {
+    public String getPvm() {
         return pvm;
     }
     
-   public Date getViimeisin() {
+   public String getViimeisin() {
        if(this.avaukset.isEmpty()) {
            return this.pvm;
        }
@@ -48,13 +49,9 @@ public class Alue {
       
       return i;
    }
-   
-   public void haeAvaukset(List<Avaus> avaukset) {
-       for (Avaus a : avaukset) {
-            if (a.getAlue().getId() == this.id) {
-                this.avaukset.add(a);
-            }
-        }
-   }
+
+    public void setAvaukset(List<Avaus> avaukset) {
+        this.avaukset = avaukset;
+    }
     
 }

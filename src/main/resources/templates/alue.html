@@ -3,7 +3,7 @@
 
     <head>
         <title>Otsikko</title>
-        <meta charset="ISO-8859-1" />
+        <meta charset="utf-8" />
         <style>
             table, th, td {
                 border: 1px solid black;
@@ -23,7 +23,7 @@
                 <tr>
                     <th>Otsikko</th>
                     <th>Kirjoittaja</th>
-                    <th>Viestien m��r�</th>
+                    <th>Viestien määrä</th>
                     <th>Uusin viesti</th>
                 </tr>
             </thead>
@@ -31,7 +31,7 @@
                 <tr th:each="avaus: ${alue.avaukset}">
                     <td><a th:href="${'/ketju/' + avaus.id}"><span th:text="${avaus.otsikko}">avauksen otsikko</span></a></td>
                     <td th:text="${avaus.kirjoittaja}">avauksen kirjoittaja</td>
-                    <td th:text="${avaus.koko}">viestien m��r�</td>
+                    <td th:text="${avaus.koko}">viestien lkm</td>
                     <td th:text="${avaus.viimeisin}">pvm</td>
                 </tr>
             </tbody>
@@ -39,7 +39,7 @@
 
         <p></p>
         <p><b>Lisää viesti</b></p>
-        <form method="POST" action="/">
+        <form method="POST" th:action="${'/alue/' + alue.id}">
             Kirjoittaja:<br/>
             <input type="text" name="kirjoittaja"/><br/>
             Otsikko:<br/>

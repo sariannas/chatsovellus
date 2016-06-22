@@ -4,14 +4,14 @@ import java.util.*;
 public class Viesti {
     private String kirjoittaja;
     private String sisalto;
-    private Date pvm;
+    private String pvm;
     private int id; // tätä ei käytetä oikeastaan mihinkään
     private Avaus avaus;
 
-    public Viesti(String kirjoittaja, String sisalto) {
+    public Viesti(String kirjoittaja, String sisalto, String pvm) {
         this.kirjoittaja = kirjoittaja;
         this.sisalto = sisalto;
-        this.pvm = new Date();
+        this.pvm = pvm;
         this.id = 1;
     }
 
@@ -23,7 +23,7 @@ public class Viesti {
         return kirjoittaja;
     }
 
-    public Date getPvm() {
+    public String getPvm() {
         return pvm;
     }
 
@@ -37,7 +37,7 @@ public class Viesti {
     
     
 
-    public void setPvm(Date pvm) {
+    public void setPvm(String pvm) {
         this.pvm = pvm;
     }
 
