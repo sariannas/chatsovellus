@@ -3,7 +3,7 @@
 
     <head>
         <title>Otsikko</title>
-        <meta charset="ISO-8859-1" />
+        <meta charset="utf-8" />
         <style>
             table, th, td {
                 border: 1px solid black;
@@ -33,20 +33,20 @@
             <tbody>
                 <tr th:each="viesti: ${avaus.viestit}">
                     <td th:text="${viesti.kirjoittaja}">viestin kirjoittaja</td>
-                    <td th:text="${viesti.sisalto}">viestin sisältö</td>
+                    <td th:text="${viesti.sisalto}">viestin sisï¿½ltï¿½</td>
                     <td th:text="${viesti.pvm}">viestin pvm</td>
                 </tr>
             </tbody>
         </table>
 
         <p></p>
-        <p><b>Lisää viesti</b></p>
-        <form method="POST" action="/">
+        <p><b>LisÃ¤Ã¤ viesti</b></p>
+        <form method="POST" th:action="${'/ketju/' + avaus.id}">
             Kirjoittaja:<br/>
             <input type="text" name="kirjoittaja"/><br/>
             Viesti:<br/>
             <textarea rows="4" cols="50" name="sisalto"></textarea> <br/>
-            <input type="submit" value="Lähetä"/>
+            <input type="submit" value="LÃ¤hetÃ¤"/>
         </form>
     </body>
 </html>

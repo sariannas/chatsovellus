@@ -23,6 +23,7 @@ public class Main {
         
         AlueDao alueDao = new AlueDao(database);
         AvausDao avausDao = new AvausDao(database,alueDao);
+        ViestiDao viestiDao = new ViestiDao(database,avausDao);
 
         if (System.getenv("PORT") != null) {
             port(Integer.valueOf(System.getenv("PORT")));
@@ -74,10 +75,26 @@ public class Main {
         // avaus + viestiketju
         get("/ketju/:id", (req, res) -> {
             HashMap map = new HashMap<>();
-            //map.put("avaus", ekanEka);
+            Avaus a = avausDao.findOne(Integer.parseInt(req.params("id")));
+            a.setViestit(viestiDao.findAvauksella(a));
+            map.put("avaus", a);
 
             return new ModelAndView(map, "avaus");
         }, new ThymeleafTemplateEngine());
+        
+        // viestin lisäys
+        post("/ketju/:id", (req, res) -> {
+            String kirjoittaja = req.queryParams("kirjoittaja");
+            String sisalto = req.queryParams("sisalto");
+            int avausId = Integer.parseInt(req.params("id"));
+            if (kirjoittaja.length() > 50 || sisalto.length() > 5000) {
+                return "Otsikko, viesti tai nimimerkki on liian pitkä.";
+            }
+            
+            viestiDao.uusi(kirjoittaja,sisalto,avausId);
+            return "Vastaus lisätty.";
+        });
+        
 
 //        // pohjassa valmiina olleet sivut
 //        get("/opiskelijat", (req, res) -> {

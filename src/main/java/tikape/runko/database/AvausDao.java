@@ -35,7 +35,7 @@ public class AvausDao implements Dao<Avaus, Integer> {
             String sisalto = rs.getString("sisalto");
             String pvm = rs.getString("pvm");
 
-            Avaus a = new Avaus(id, otsikko, kirjoittaja, sisalto,pvm);
+            Avaus a = new Avaus(id, otsikko, kirjoittaja, sisalto, pvm);
 
             Integer alueId = rs.getInt("alue");
             Alue alue = alueDao.findOne(alueId);
@@ -63,7 +63,7 @@ public class AvausDao implements Dao<Avaus, Integer> {
                 String sisalto = rs.getString("sisalto");
                 String pvm = rs.getString("pvm");
 
-                Avaus a = new Avaus(id, otsikko, kirjoittaja, sisalto,pvm);
+                Avaus a = new Avaus(id, otsikko, kirjoittaja, sisalto, pvm);
                 avaukset.add(a);
 
                 Integer alueId = rs.getInt("alue");
@@ -81,8 +81,8 @@ public class AvausDao implements Dao<Avaus, Integer> {
     public void delete(Integer key) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public void uusi(String otsikko, String kirjoittaja, String sisalto, int alueId) throws SQLException {  
+
+    public void uusi(String otsikko, String kirjoittaja, String sisalto, int alueId) throws SQLException {
         try (Connection connection = this.database.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement("INSERT INTO Avaus(pvm, otsikko, kirjoittaja, sisalto, alue) VALUES (datetime(), ?, ?, ?,?);");
             stmt.setString(1, otsikko);
@@ -93,13 +93,13 @@ public class AvausDao implements Dao<Avaus, Integer> {
             stmt.close();
         }
     }
-    
-        public List<Avaus> findAlueella(Alue alue) throws SQLException {
+
+    public List<Avaus> findAlueella(Alue alue) throws SQLException {
         List<Avaus> avaukset;
         try (Connection connection = database.getConnection()) {
             int alueId = alue.getId();
             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Avaus WHERE alue = ?;");
-            stmt.setInt(1,alueId);
+            stmt.setInt(1, alueId);
             ResultSet rs = stmt.executeQuery();
             avaukset = new ArrayList<>();
 
@@ -110,7 +110,7 @@ public class AvausDao implements Dao<Avaus, Integer> {
                 String sisalto = rs.getString("sisalto");
                 String pvm = rs.getString("pvm");
 
-                Avaus a = new Avaus(id, otsikko, kirjoittaja, sisalto,pvm);
+                Avaus a = new Avaus(id, otsikko, kirjoittaja, sisalto, pvm);
                 avaukset.add(a);
 
                 a.setAlue(alue);

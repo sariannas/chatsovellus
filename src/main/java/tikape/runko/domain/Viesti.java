@@ -8,7 +8,7 @@ public class Viesti {
     private int id; // tätä ei käytetä oikeastaan mihinkään
     private Avaus avaus;
 
-    public Viesti(String kirjoittaja, String sisalto, String pvm) {
+    public Viesti(int id, String kirjoittaja, String sisalto, String pvm) {
         this.kirjoittaja = kirjoittaja;
         this.sisalto = sisalto;
         this.pvm = pvm;
