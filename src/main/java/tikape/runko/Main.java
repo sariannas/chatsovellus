@@ -18,12 +18,12 @@ public class Main {
         String jdbcOsoite = "jdbc:sqlite:foorumi.db";
 //        jos heroku antaa käyttöömme tietokantaosoitteen, otetaan se käyttöön
 
-        if (System.getenv("DATABASE_URL") != null) {
-            jdbcOsoite = System.getenv("DATABASE_URL");
-        }
+//        if (System.getenv("DATABASE_URL") != null) {
+//            jdbcOsoite = System.getenv("DATABASE_URL");
+//        }
 
         Database database = new Database(jdbcOsoite);
-        database.init();
+        //database.init();
 
         AlueDao alueDao = new AlueDao(database);
         AvausDao avausDao = new AvausDao(database, alueDao);
