@@ -41,7 +41,7 @@
 
         <p></p>
         <p><b>Lisää viesti</b></p>
-        <form method="POST" th:action="${'/ketju/' + avaus.id}">
+        <form method="POST" th:action="${'/alue/' + avaus.alueId + '/' + avaus.id}">
             Kirjoittaja:<br/>
             <input type="text" name="kirjoittaja"/><br/>
             Viesti:<br/>

@@ -73,7 +73,7 @@ public class Main {
         });
 
         // avaus + viestiketju
-        get("/alue/:alue.id/:id", (req, res) -> {
+        get("/alue/:alueId/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             Avaus a = avausDao.findOne(Integer.parseInt(req.params("id")));
             
@@ -84,7 +84,7 @@ public class Main {
         }, new ThymeleafTemplateEngine());
 
         // viestin lisäys
-        post("/ketju/:id", (req, res) -> {
+        post("/alue/:alueId/:id", (req, res) -> {
             String kirjoittaja = req.queryParams("kirjoittaja");
             String sisalto = req.queryParams("sisalto");
             int avausId = Integer.parseInt(req.params("id"));

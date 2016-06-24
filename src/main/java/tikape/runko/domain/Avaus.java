@@ -60,9 +60,8 @@ public class Avaus {
         this.alue = alue;
     }
 
-    public void lisaaViesti(Viesti viesti) {
-        this.viestit.add(viesti);
-        viesti.setAvaus(this);
+    public int getAlueId() {
+        return this.alue.getId();
     }
     
     public String getViimeisin() {
