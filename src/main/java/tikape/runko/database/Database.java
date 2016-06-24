@@ -74,9 +74,9 @@ public class Database {
 
         // tietokantataulujen luomiseen tarvittavat komennot suoritusjärjestyksessä
         // heroku käyttää SERIAL-avainsanaa uuden tunnuksen automaattiseen luomiseen
-        lista.add("CREATE TABLE Alue(id integer SERIAL PRIMARY KEY,otsikko varchar(100));");
-        lista.add("CREATE TABLE Avaus(id integer SERIAL PRIMARY KEY, pvm datetime,otsikko varchar(100),kirjoittaja varchar(100),sisalto TEXT,alue integer,FOREIGN KEY(alue) REFERENCES Alue(id));");
-        lista.add("CREATE TABLE Viesti(id integer serial PRIMARY KEY,pvm datetime,kirjoittaja varchar(100),sisalto TEXT,avaus integer,FOREIGN KEY(avaus) REFERENCES Avaus(id));");
+        lista.add("CREATE TABLE Alue(id SERIAL PRIMARY KEY,otsikko varchar(100));");
+        lista.add("CREATE TABLE Avaus(id SERIAL PRIMARY KEY, pvm datetime,otsikko varchar(100),kirjoittaja varchar(100),sisalto TEXT,alue integer,FOREIGN KEY(alue) REFERENCES Alue(id));");
+        lista.add("CREATE TABLE Viesti(id SERIAL PRIMARY KEY,pvm datetime,kirjoittaja varchar(100),sisalto TEXT,avaus integer,FOREIGN KEY(avaus) REFERENCES Avaus(id));");
         lista.add("INSERT INTO Aihe(otsikko) VALUES('Otsikko');");
         lista.add("INSERT INTO Avaus(pvm, otsikko, kirjoittaja, sisalto, alue) VALUES (datetime(), 'otsikko', 'nimi', 'viestin sisältö',1);");
         lista.add("INSERT INTO Viesti(pvm, kirjoittaja, sisalto, avaus) VALUES (datetime(), 'nimi', 'viestin sisältö', 1);");
