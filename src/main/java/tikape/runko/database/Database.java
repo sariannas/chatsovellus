@@ -47,19 +47,17 @@ public class Database {
 //        lista.add("INSERT INTO Opiskelija (nimi) VALUES ('Platon');");
 //        lista.add("INSERT INTO Opiskelija (nimi) VALUES ('Aristoteles');");
 //        lista.add("INSERT INTO Opiskelija (nimi) VALUES ('Homeros');");
-
         return lista;
     }
-    
-        private List<String> postgreLauseet() {
+
+    private List<String> postgreLauseet() {
         ArrayList<String> lista = new ArrayList<>();
 
         // tietokantataulujen luomiseen tarvittavat komennot suoritusjärjestyksessä
-        //lista.add("DROP TABLE aihe;");
         // heroku käyttää SERIAL-avainsanaa uuden tunnuksen automaattiseen luomiseen
-        lista.add("CREATE TABLE aihe (tunnus SERIAL PRIMARY KEY, kirjoittaja varchar(50), sisalto varchar(500));");
-        //lista.add("INSERT INTO aihe (kirjoittaja,sisalto) VALUES ('Esimerkki 2','Jännää');");
-
+        lista.add("CREATE TABLE Alue(id integer SERIAL PRIMARY KEY,otsikko varchar(100));");
+        lista.add("CREATE TABLE Avaus(id integer SERIAL PRIMARY KEY, pvm datetime,otsikko varchar(100),kirjoittaja varchar(100),sisalto TEXT,alue integer,FOREIGN KEY(alue) REFERENCES Alue(id));");
+        lista.add("CREATE TABLE Viesti(id integer serial PRIMARY KEY,pvm datetime,kirjoittaja varchar(100),sisalto TEXT,avaus integer,FOREIGN KEY(avaus) REFERENCES Avaus(id));");
         return lista;
     }
 }

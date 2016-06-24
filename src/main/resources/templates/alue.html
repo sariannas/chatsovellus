@@ -29,7 +29,7 @@
             </thead>
             <tbody>
                 <tr th:each="avaus: ${alue.avaukset}">
-                    <td><a th:href="${'/ketju/' + avaus.id}"><span th:text="${avaus.otsikko}">avauksen otsikko</span></a></td>
+                    <td><a th:href="${'/alue/' + alue.id + '/' + avaus.id}"><span th:text="${avaus.otsikko}">avauksen otsikko</span></a></td>
                     <td th:text="${avaus.kirjoittaja}">avauksen kirjoittaja</td>
                     <td th:text="${avaus.koko}">viestien lkm</td>
                     <td th:text="${avaus.viimeisin}">pvm</td>
