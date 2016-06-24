@@ -84,7 +84,7 @@ public class AvausDao implements Dao<Avaus, Integer> {
 
     public void uusi(String otsikko, String kirjoittaja, String sisalto, int alueId) throws SQLException {
         try (Connection connection = this.database.getConnection()) {
-            PreparedStatement stmt = connection.prepareStatement("INSERT INTO Avaus(pvm, otsikko, kirjoittaja, sisalto, alue) VALUES (datetime(), ?, ?, ?,?);");
+            PreparedStatement stmt = connection.prepareStatement("INSERT INTO Avaus(pvm, otsikko, kirjoittaja, sisalto, alue) VALUES (current_timestamp, ?, ?, ?,?);");
             stmt.setString(1, otsikko);
             stmt.setString(2, kirjoittaja);
             stmt.setString(3, sisalto);
