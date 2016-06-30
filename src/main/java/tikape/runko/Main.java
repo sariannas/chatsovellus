@@ -29,12 +29,12 @@ public class Main {
         ViestiDao viestiDao = new ViestiDao(database, avausDao);
 
         // testiviestien lisäys
-        int i = 1;
-        while(i<11) {
-            String v = "Viesti numero " + i;
-            viestiDao.uusi("nimimerkki", v, 1);
-            i++;
-        }
+//        int i = 1;
+//        while(i<11) {
+//            String v = "Viesti numero " + i;
+//            viestiDao.uusi("nimimerkki", v, 1);
+//            i++;
+//        }
 
         // etusivu
         get("/", (req, res) -> {
