@@ -28,6 +28,14 @@ public class Main {
         AvausDao avausDao = new AvausDao(database, alueDao);
         ViestiDao viestiDao = new ViestiDao(database, avausDao);
 
+        // testiviestien lisäys
+        int i = 1;
+        while(i<11) {
+            String v = "Viesti numero " + i;
+            viestiDao.uusi("nimimerkki", v, 1);
+            i++;
+        }
+
         // etusivu
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -71,22 +79,35 @@ public class Main {
             return "Keskustelunavaus lisätty.";
         });
 
-        // avaus + viestiketju
-        get("/alue/:alueId/:id", (req, res) -> {
-            HashMap map = new HashMap<>();
-            Avaus a = avausDao.findOne(Integer.parseInt(req.params("id")));
-            
-            a.setViestit(viestiDao.findAvauksella(a));
-            map.put("avaus", a);
+//        // avaus + viestiketju ilman sivujakoa
+//        get("/alue/:alueId/:id", (req, res) -> {
+//            HashMap map = new HashMap<>();
+//            Avaus a = avausDao.findOne(Integer.parseInt(req.params("id")));
+//
+//            a.setSivut(viestiDao.findAvauksella(a));
+//            map.put("avaus", a);
+//
+//            return new ModelAndView(map, "avaus");
+//        }, new ThymeleafTemplateEngine());
 
-            return new ModelAndView(map, "avaus");
+        // jako sivuihin
+        get("alue/:alueId/:avausId/sivu/:id", (req, res) -> {
+            HashMap map = new HashMap<>();
+            Avaus a = avausDao.findOne(Integer.parseInt(req.params("avausId")));
+            a.setSivut(viestiDao.findAvauksella(a));
+            int sivunro = Integer.parseInt(req.params("id"));
+            
+            map.put("sivu", a.getSivut().get(sivunro-1));
+            map.put("avaus",a);
+
+            return new ModelAndView(map, "sivu");
         }, new ThymeleafTemplateEngine());
 
         // viestin lisäys
-        post("/alue/:alueId/:id", (req, res) -> {
+        post("/alue/:alueId/:avausId/sivu/:id", (req, res) -> {
             String kirjoittaja = req.queryParams("kirjoittaja");
             String sisalto = req.queryParams("sisalto");
-            int avausId = Integer.parseInt(req.params("id"));
+            int avausId = Integer.parseInt(req.params("avausId"));
             if (kirjoittaja.length() > 50 || sisalto.length() > 5000) {
                 return "Otsikko, viesti tai nimimerkki on liian pitkä.";
             }

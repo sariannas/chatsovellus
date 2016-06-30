@@ -21,8 +21,14 @@
         <p><span th:text="${avaus.pvm}">pvm</span></p>
         <p></p>
         <p><span th:text="${avaus.sisalto}">keskustelunavaus</span></p>
+        
+        <p>
+            <span th:each="sivu : ${avaus.sivut}">
+                | <a th:href="${'/alue/' + avaus.alueId + '/' + avaus.id + '/sivu/' + sivu.id}"><span th:text="${sivu.id}" >sivunumero</span></a>
+            </span> |
+        </p>
 
-        <table th:each="sivu : ${avaus.sivut}">
+        <table>
             <thead>
                 <tr>
                     <th>Kirjoittaja</th>
@@ -38,15 +44,15 @@
                 </tr>
             </tbody>
         </table>
-
+        
         <p></p>
-        <p><b>Lisää viesti</b></p>
-        <form method="POST" th:action="${'/alue/' + avaus.alueId + '/' + avaus.id}">
+        <p><b>Lisaa viesti</b></p>
+        <form method="POST" th:action="${'/alue/' + avaus.alueId + '/' + avaus.id + '/sivu/' + sivu.id}">
             Kirjoittaja:<br/>
             <input type="text" name="kirjoittaja"/><br/>
             Viesti:<br/>
             <textarea rows="4" cols="50" name="sisalto"></textarea> <br/>
-            <input type="submit" value="Lähetä"/>
+            <input type="submit" value="Laheta"/>
         </form>
     </body>
 </html>

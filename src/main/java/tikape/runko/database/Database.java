@@ -77,9 +77,6 @@ public class Database {
         lista.add("CREATE TABLE Alue(id SERIAL PRIMARY KEY,otsikko varchar(100));");
         lista.add("CREATE TABLE Avaus(id SERIAL PRIMARY KEY, pvm timestamp,otsikko varchar(100),kirjoittaja varchar(100),sisalto TEXT,alue integer,FOREIGN KEY(alue) REFERENCES Alue(id));");
         lista.add("CREATE TABLE Viesti(id SERIAL PRIMARY KEY,pvm timestamp,kirjoittaja varchar(100),sisalto TEXT,avaus integer,FOREIGN KEY(avaus) REFERENCES Avaus(id));");
-        lista.add("INSERT INTO Aihe(otsikko) VALUES('Otsikko');");
-        lista.add("INSERT INTO Avaus(pvm, otsikko, kirjoittaja, sisalto, alue) VALUES (datetime(), 'otsikko', 'nimi', 'viestin sisältö',1);");
-        lista.add("INSERT INTO Viesti(pvm, kirjoittaja, sisalto, avaus) VALUES (datetime(), 'nimi', 'viestin sisältö', 1);");
         return lista;
     }
 }

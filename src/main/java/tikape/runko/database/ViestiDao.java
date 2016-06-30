@@ -113,7 +113,9 @@ public class ViestiDao implements Dao<Viesti, Integer> {
     
     public void uusi(String kirjoittaja, String sisalto, int avausId) throws SQLException {
         try (Connection connection = this.database.getConnection()) {
+            //postgres-versiossa current_timestamp, sqlitessä datetime()
             PreparedStatement stmt = connection.prepareStatement("INSERT INTO Viesti(pvm, kirjoittaja, sisalto, avaus) VALUES (current_timestamp, ?, ?,?);");
+            //PreparedStatement stmt = connection.prepareStatement("INSERT INTO Viesti(pvm, kirjoittaja, sisalto, avaus) VALUES (datetime(), ?, ?, ?);");
             stmt.setString(1, kirjoittaja);
             stmt.setString(2, sisalto);
             stmt.setInt(3, avausId);
