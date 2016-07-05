@@ -45,7 +45,7 @@ public class AlueDao implements Dao<Alue, Integer> {
     public List<Alue> findAll() throws SQLException {
         List<Alue> alueet = new ArrayList();
         try (Connection connection = database.getConnection()) {
-            PreparedStatement stmt = connection.prepareStatement("SELECT *, count(*) AS lkm FROM Alue LEFT JOIN Avaus ON Avaus.alue = Alue.id LEFT JOIN Viesti ON Viesti.avaus = Avaus.id GROUP BY Alue.id;");
+            PreparedStatement stmt = connection.prepareStatement("SELECT *, count(*) AS lkm FROM Alue LEFT JOIN Avaus ON (Avaus.alue = Alue.id) LEFT JOIN Viesti ON (Viesti.avaus = Avaus.id) GROUP BY Alue.id;");
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
