@@ -9,9 +9,9 @@ public class Avaus {
     private String otsikko;
     private String sisalto;
     private String pvm;
-    //private List<Viesti> viestit;
     private List<Sivu> sivut;
     private Alue alue;
+    private int koko;
 
     public Avaus(int id, String otsikko, String kirjoittaja, String sisalto, String pvm) {
         this.id = id;
@@ -20,8 +20,8 @@ public class Avaus {
         this.sisalto = sisalto;
 
         this.pvm = pvm;
-        //this.viestit = new ArrayList();
         this.sivut = new ArrayList();
+        this.koko = 0;
     }
 
     public int getId() {
@@ -44,12 +44,20 @@ public class Avaus {
         return pvm;
     }
 
-//    public List<Viesti> getViestit() {
-//        return viestit;
-//    }
-
     public Alue getAlue() {
         return alue;
+    }
+
+    public int getAlueId() {
+        return this.alue.getId();
+    }
+
+    public int getKoko() {
+        return koko;
+    }
+
+    public void setKoko(int koko) {
+        this.koko = koko;
     }
 
     public void setId(int id) {
@@ -59,11 +67,6 @@ public class Avaus {
     public void setAlue(Alue alue) {
         this.alue = alue;
     }
-
-    public int getAlueId() {
-        return this.alue.getId();
-    }
-
 
     public String getViimeisin() {
 //        //Jos viestejä ei ole, palautetaan avauksen pvm.
@@ -75,11 +78,7 @@ public class Avaus {
 //        Viesti vika = this.viestit.get(this.viestit.size() - 1);
 //        return vika.getPvm();
 
-          return this.pvm;
-    }
-
-    public int getKoko() {
-        return 1;
+        return this.pvm;
     }
 
     public void setSivut(List<Viesti> viestit) {
@@ -89,16 +88,16 @@ public class Avaus {
                 this.sivut.add(new Sivu(kymmenen));
                 kymmenen = new ArrayList();
             }
-            
+
             kymmenen.add(v);
         }
         this.sivut.add(new Sivu(kymmenen));
-        
-        for(int i = 0;i<this.sivut.size();i++) {
-            this.sivut.get(i).setNro(i+1);
+
+        for (int i = 0; i < this.sivut.size(); i++) {
+            this.sivut.get(i).setNro(i + 1);
         }
     }
-    
+
     public List<Sivu> getSivut() {
         return this.sivut;
     }

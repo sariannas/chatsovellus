@@ -40,6 +40,7 @@ public class Main {
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             List<Alue> alueet = alueDao.findAll();
+            
             map.put("alueet", alueet);
 
             return new ModelAndView(map, "index");

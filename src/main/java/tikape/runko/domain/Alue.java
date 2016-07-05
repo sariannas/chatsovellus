@@ -7,6 +7,7 @@ public class Alue {
     private String otsikko;
     private String pvm;
     private List<Sivu> sivut;
+    private int koko;
 
     public Alue(int id, String otsikko) {
         this.id = id;
@@ -14,6 +15,7 @@ public class Alue {
         Date nyt = new Date();
         this.pvm = nyt.toString();
         this.sivut = new ArrayList();
+        this.koko = 0;
     }
 
     public List<Sivu> getSivut() {
@@ -35,11 +37,13 @@ public class Alue {
    public String getViimeisin() {
        return this.pvm;
    }
+
+    public void setKoko(int koko) {
+        this.koko = koko;
+    }
       
    public int getKoko() {
-      int i = 0;
-      
-      return i;
+      return this.koko;
    }
 
     public void setSivut(List<Avaus> avaukset) {

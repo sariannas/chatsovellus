@@ -45,17 +45,20 @@ public class AlueDao implements Dao<Alue, Integer> {
     public List<Alue> findAll() throws SQLException {
         List<Alue> alueet = new ArrayList();
         try (Connection connection = database.getConnection()) {
-            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Alue;");
+            PreparedStatement stmt = connection.prepareStatement("SELECT *, count(*) AS lkm FROM Alue LEFT JOIN Avaus ON Avaus.alue = Alue.id LEFT JOIN Viesti ON Viesti.avaus = Avaus.id GROUP BY Alue.id;");
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
+                Integer luku = rs.getInt("lkm");
                 String otsikko = rs.getString("otsikko");
                 Integer id = rs.getInt("id");
 
                 Alue a = new Alue(id, otsikko);
+                a.setKoko(luku);
                 alueet.add(a);
+
             }
-            
+
             rs.close();
             stmt.close();
         }
@@ -66,7 +69,7 @@ public class AlueDao implements Dao<Alue, Integer> {
     public void delete(Integer key) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     public void uusi(String otsikko) throws Exception {
         try (Connection connection = this.database.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement("INSERT INTO Alue(otsikko) VALUES (?);");
