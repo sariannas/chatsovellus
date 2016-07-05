@@ -1,38 +1,25 @@
 package tikape.runko.domain;
 import java.util.*;
 
-public class Sivu {
-    private int id;
-    private Avaus avaus;
-    private List<Viesti> viestit;
+public class Sivu<T> {
+    private int nro;
+    private List<T> lista;
 
-    public Sivu(Avaus avaus, List<Viesti> viestit) {
-        this.id = 1;
-        this.avaus = avaus;
-        this.viestit = viestit;
+    public Sivu(List<T> lista) {
+        this.nro = 1;
+        this.lista = lista;
     }
 
-    public int getId() {
-        return id;
+    public int getNro() {
+        return nro;
     }
 
-    public int getAvausId() {
-        return this.avaus.getId();
-    }
-    
-    public int getAlueId() {
-        return this.avaus.getAlueId();
+    public List<T> getLista() {
+        return lista;
     }
 
-    public List<Viesti> getViestit() {
-        return viestit;
+    public void setNro(int id) {
+        this.nro = id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-    
-    
-    
 }

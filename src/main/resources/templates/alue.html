@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Otsikko</title>
+        <title th:text="${alue.otsikko}">Otsikko</title>
         <meta charset="utf-8" />
         <style>
             table, th, td {
@@ -17,18 +17,24 @@
 
     <body>
         <h1><span th:text="${alue.otsikko}">otsikko</span></h1>
+        
+        <p>
+            <span th:each="sivu : ${alue.sivut}">
+                | <a th:href="${'/alue/' + alue.id + '/sivu/' + sivu.nro}"><span th:text="${sivu.nro}" >sivunumero</span></a>
+            </span> |
+        </p>
 
         <table>
             <thead>
                 <tr>
                     <th>Otsikko</th>
                     <th>Kirjoittaja</th>
-                    <th>Viestien määrä</th>
+                    <th>Viestien maara</th>
                     <th>Uusin viesti</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="avaus: ${alue.avaukset}">
+                <tr th:each="avaus: ${sivu.lista}">
                     <td><a th:href="${'/alue/' + alue.id + '/' + avaus.id + '/sivu/1'}"><span th:text="${avaus.otsikko}">avauksen otsikko</span></a></td>
                     <td th:text="${avaus.kirjoittaja}">avauksen kirjoittaja</td>
                     <td th:text="${avaus.koko}">viestien lkm</td>
@@ -38,15 +44,15 @@
         </table>
 
         <p></p>
-        <p><b>Lisää viesti</b></p>
-        <form method="POST" th:action="${'/alue/' + alue.id}">
+        <p><b>Lisaa viesti</b></p>
+        <form method="POST" th:action="${'/alue/' + alue.id + '/sivu/' + sivu.nro}">
             Kirjoittaja:<br/>
             <input type="text" name="kirjoittaja"/><br/>
             Otsikko:<br/>
             <input type="text" name="otsikko"/><br/>
             Viesti:<br/>
             <textarea rows="4" cols="50" name="sisalto"></textarea> <br/>
-            <input type="submit" value="Lähetä"/>
+            <input type="submit" value="Laheta"/>
         </form>
     </body>
 </html>

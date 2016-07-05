@@ -86,16 +86,16 @@ public class Avaus {
         List<Viesti> kymmenen = new ArrayList();
         for (Viesti v : viestit) {
             if (kymmenen.size() == 10) {
-                this.sivut.add(new Sivu(this,kymmenen));
+                this.sivut.add(new Sivu(kymmenen));
                 kymmenen = new ArrayList();
             }
             
             kymmenen.add(v);
         }
-        this.sivut.add(new Sivu(this,kymmenen));
+        this.sivut.add(new Sivu(kymmenen));
         
         for(int i = 0;i<this.sivut.size();i++) {
-            this.sivut.get(i).setId(i+1);
+            this.sivut.get(i).setNro(i+1);
         }
     }
     

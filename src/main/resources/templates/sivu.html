@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Otsikko</title>
+        <title th:text="${avaus.otsikko}">Otsikko</title>
         <meta charset="utf-8" />
         <style>
             table, th, td {
@@ -24,7 +24,7 @@
         
         <p>
             <span th:each="sivu : ${avaus.sivut}">
-                | <a th:href="${'/alue/' + avaus.alueId + '/' + avaus.id + '/sivu/' + sivu.id}"><span th:text="${sivu.id}" >sivunumero</span></a>
+                | <a th:href="${'/alue/' + avaus.alueId + '/' + avaus.id + '/sivu/' + sivu.nro}"><span th:text="${sivu.nro}" >sivunumero</span></a>
             </span> |
         </p>
 
@@ -37,7 +37,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="viesti: ${sivu.viestit}">
+                <tr th:each="viesti: ${sivu.lista}">
                     <td th:text="${viesti.kirjoittaja}">viestin kirjoittaja</td>
                     <td th:text="${viesti.sisalto}">viestin sisältö</td>
                     <td th:text="${viesti.pvm}">viestin pvm</td>
@@ -47,7 +47,7 @@
         
         <p></p>
         <p><b>Lisaa viesti</b></p>
-        <form method="POST" th:action="${'/alue/' + avaus.alueId + '/' + avaus.id + '/sivu/' + sivu.id}">
+        <form method="POST" th:action="${'/alue/' + avaus.alueId + '/' + avaus.id + '/sivu/' + sivu.nro}">
             Kirjoittaja:<br/>
             <input type="text" name="kirjoittaja"/><br/>
             Viesti:<br/>

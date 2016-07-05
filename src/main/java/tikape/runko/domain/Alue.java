@@ -6,18 +6,18 @@ public class Alue {
     private int id;
     private String otsikko;
     private String pvm;
-    private List<Avaus> avaukset;
+    private List<Sivu> sivut;
 
     public Alue(int id, String otsikko) {
         this.id = id;
         this.otsikko = otsikko;
         Date nyt = new Date();
         this.pvm = nyt.toString();
-        this.avaukset = new ArrayList();
+        this.sivut = new ArrayList();
     }
 
-    public List<Avaus> getAvaukset() {
-        return avaukset;
+    public List<Sivu> getSivut() {
+        return sivut;
     }
 
     public int getId() {
@@ -33,25 +33,30 @@ public class Alue {
     }
     
    public String getViimeisin() {
-       if(this.avaukset.isEmpty()) {
-           return this.pvm;
-       }
-       
-       Avaus a = this.avaukset.get(this.avaukset.size()-1);
-       return a.getViimeisin();
+       return this.pvm;
    }
       
    public int getKoko() {
       int i = 0;
-      for(Avaus a : this.avaukset) {
-          i+=a.getKoko();
-      }
       
       return i;
    }
 
-    public void setAvaukset(List<Avaus> avaukset) {
-        this.avaukset = avaukset;
+    public void setSivut(List<Avaus> avaukset) {
+        List<Avaus> kymmenen = new ArrayList();
+        for (Avaus a : avaukset) {
+            if (kymmenen.size() == 10) {
+                this.sivut.add(new Sivu(kymmenen));
+                kymmenen = new ArrayList();
+            }
+            
+            kymmenen.add(a);
+        }
+        this.sivut.add(new Sivu(kymmenen));
+        
+        for(int i = 0;i<this.sivut.size();i++) {
+            this.sivut.get(i).setNro(i+1);
+        }
     }
     
 }
