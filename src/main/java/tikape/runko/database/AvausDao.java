@@ -98,7 +98,8 @@ public class AvausDao implements Dao<Avaus, Integer> {
         List<Avaus> avaukset;
         try (Connection connection = database.getConnection()) {
             int alueId = alue.getId();
-            PreparedStatement stmt = connection.prepareStatement("SELECT *, count(*) AS lkm FROM Avaus LEFT JOIN Viesti ON Viesti.avaus=Avaus.id GROUP BY Avaus.id HAVING alue = ?;");
+            //PreparedStatement stmt = connection.prepareStatement("SELECT *, count(*) AS lkm FROM Avaus LEFT JOIN Viesti ON Viesti.avaus=Avaus.id GROUP BY Avaus.id HAVING alue = ?;");
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Avaus WHERE alue = ?;");
             stmt.setInt(1, alueId);
             ResultSet rs = stmt.executeQuery();
             avaukset = new ArrayList<>();
@@ -109,10 +110,10 @@ public class AvausDao implements Dao<Avaus, Integer> {
                 String kirjoittaja = rs.getString("kirjoittaja");
                 String sisalto = rs.getString("sisalto");
                 String pvm = rs.getString("pvm");
-                int koko = rs.getInt("lkm");
+                //int koko = rs.getInt("lkm");
 
                 Avaus a = new Avaus(id, otsikko, kirjoittaja, sisalto, pvm);
-                a.setKoko(koko);
+                //a.setKoko(koko);
                 avaukset.add(a);
 
                 a.setAlue(alue);
