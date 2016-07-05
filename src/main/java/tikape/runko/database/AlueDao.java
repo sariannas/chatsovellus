@@ -45,16 +45,16 @@ public class AlueDao implements Dao<Alue, Integer> {
     public List<Alue> findAll() throws SQLException {
         List<Alue> alueet = new ArrayList();
         try (Connection connection = database.getConnection()) {
-            PreparedStatement stmt = connection.prepareStatement("SELECT Alue.otsikko AS otsikko, Alue.id AS id, count(*) AS lkm FROM Alue, Avaus, Viesti GROUP BY Alue.id HAVING Avaus.alue = Alue.id AND Viesti.avaus = Avaus.id;");
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Alue;");
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Integer luku = rs.getInt("lkm");
+                //Integer luku = rs.getInt("lkm");
                 String otsikko = rs.getString("otsikko");
                 Integer id = rs.getInt("id");
 
                 Alue a = new Alue(id, otsikko);
-                a.setKoko(luku);
+                //a.setKoko(luku);
                 alueet.add(a);
 
             }
