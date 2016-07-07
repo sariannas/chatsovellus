@@ -1,7 +1,7 @@
 package tikape.runko.domain;
 
 import java.util.*;
-public class Viesti {
+public class Viesti implements Sivullinen {
     private String kirjoittaja;
     private String sisalto;
     private String pvm;
@@ -23,6 +23,7 @@ public class Viesti {
         return kirjoittaja;
     }
 
+    @Override
     public String getPvm() {
         return pvm;
     }

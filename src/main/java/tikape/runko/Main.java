@@ -61,7 +61,10 @@ public class Main {
         get("/alue/:id/sivu/:nro", (req, res) -> {
             HashMap map = new HashMap<>();
             Alue a = alueDao.findOne(Integer.parseInt(req.params("id")));
-            a.setSivut(avausDao.findAlueella(a));
+            List<Avaus> avaukset = avausDao.findAlueella(a);
+            Collections.sort(avaukset);
+            Collections.reverse(avaukset);
+            a.setSivut(avaukset);
             int sivunro = Integer.parseInt(req.params("nro"));
             
             map.put("sivu", a.getSivut().get(sivunro-1));

@@ -2,7 +2,7 @@ package tikape.runko.domain;
 
 import java.util.*;
 
-public class Avaus {
+public class Avaus implements Sivullinen, Comparable<Avaus> {
 
     private int id;
     private String kirjoittaja;
@@ -69,20 +69,18 @@ public class Avaus {
     }
 
     public String getViimeisin() {
-//        //Jos viestejä ei ole, palautetaan avauksen pvm.
-//        //Jos viestejä on, palautetaan viimeisenä lisätyn päivämäärä.
-//        if (this.viestit.isEmpty()) {
-//            return this.pvm;
-//        }
-//
-//        Viesti vika = this.viestit.get(this.viestit.size() - 1);
-//        return vika.getPvm();
+        //Jos viestejä ei ole, palautetaan avauksen pvm.
+        //Jos viestejä on, palautetaan viimeisenä lisätyn päivämäärä.
+        if (this.sivut.isEmpty()) {
+            return this.pvm;
+        }
 
-        return this.pvm;
+       Sivu vikaSivu = this.sivut.get(this.sivut.size()-1);
+       return vikaSivu.getVikaPvm();
     }
 
     public void setSivut(List<Viesti> viestit) {
-        List<Viesti> kymmenen = new ArrayList();
+        List<Sivullinen> kymmenen = new ArrayList();
         for (Viesti v : viestit) {
             if (kymmenen.size() == 10) {
                 this.sivut.add(new Sivu(kymmenen));
@@ -100,6 +98,11 @@ public class Avaus {
 
     public List<Sivu> getSivut() {
         return this.sivut;
+    }
+
+    @Override
+    public int compareTo(Avaus t) {
+        return this.getViimeisin().compareTo(t.getViimeisin());
     }
 
 }
